@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:title="Home"
+        android:id="@id/home"
+        android:icon="@drawable/ic_launcher_foreground"
+
+        android:menuCategory="secondary"/>
+
+    <item
+        android:title="Symptoms"
+        android:icon="@drawable/coronavirus"
+        android:id="@+id/symptoms"
+        android:menuCategory="secondary"/>
+    <item
+        android:id="@+id/shareThisApp"
+        android:title="Share This App"
+        android:menuCategory="secondary"
+        android:icon="@drawable/share_this_app_foreground"
+        />
+
+
+</menu>
