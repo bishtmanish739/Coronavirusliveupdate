@@ -32,6 +32,13 @@
               android:src="@drawable/coronavirussymptoms"
               android:layout_marginTop="30dp"
               android:layout_marginBottom="60dp"/>
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:textColor="#4CAF50"
+              android:textSize="30sp"
+              android:padding="10dp"
+              android:text="Stay Safe"/>
       </LinearLayout>
   </ScrollView>
 

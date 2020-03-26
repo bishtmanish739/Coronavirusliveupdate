@@ -15,15 +15,19 @@
             <TextView
                 android:layout_gravity="center"
                 android:id="@+id/CountryName"
+                android:textColor="#000000"
+                android:textStyle="bold"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="24sp"/>
         <TextView
             android:layout_gravity="center"
             android:id="@+id/TodayCases"
+            android:textColor="#C8CC3939"
+            android:textStyle="bold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="18sp"/>
+            android:textSize="20sp"/>
 
 
         <LinearLayout
@@ -34,11 +38,15 @@
                 android:layout_margin="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="#000000"
+                android:textStyle="bold"
                 android:id="@+id/Totalcasesincountry"/>
             <TextView
                 android:layout_margin="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="#C8CC3939"
+                android:textStyle="bold"
                 android:id="@+id/Totaldeathincountry"/>
 
         </LinearLayout>
@@ -50,11 +58,15 @@
                 android:layout_margin="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/Todaydeadsincountry"/>
+                android:textStyle="bold"
+                android:id="@+id/Todaydeadsincountry"
+                android:textColor="#C8CC3939"/>
             <TextView
                 android:layout_margin="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="#125E15"
+                android:textStyle="bold"
                 android:id="@+id/TotalRecoveredincountry"/>
 
         </LinearLayout>

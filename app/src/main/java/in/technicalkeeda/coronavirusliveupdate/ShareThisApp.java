@@ -1,7 +1,10 @@
 package in.technicalkeeda.coronavirusliveupdate;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -58,7 +61,12 @@ public class ShareThisApp extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view=inflater.inflate(R.layout.fragment_share_this_app, container, false);;
+
+
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_share_this_app, container, false);
+        return view;
     }
+
 }

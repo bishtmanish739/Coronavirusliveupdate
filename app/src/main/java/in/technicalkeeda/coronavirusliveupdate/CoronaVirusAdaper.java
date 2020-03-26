@@ -58,7 +58,7 @@ class CoronaVirusAdapter extends RecyclerView.Adapter<CoronaVirusAdapter.CoronaV
     @Override
     public void onBindViewHolder(@NonNull CoronaVirusAdapter.CoronaVirusAdapterholder holder, int position) {
         final CoronaVirusData currentnote=product.get(position);
-        holder.Death.setText(currentnote.getTotalDeath()+"\nTotal Deads");
+        holder.Death.setText(currentnote.getTotalDeath()+"\nTotal Deaths");
         holder.Recoved.setText(currentnote.getTotalRecovered()+"\nTotal Recovered");
         holder.CountryName.setText(currentnote.getCountryName());
         holder.TotalCase.setText(currentnote.getTotalCases()+"\nTotal Cases");

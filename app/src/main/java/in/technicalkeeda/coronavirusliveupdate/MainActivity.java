@@ -15,7 +15,7 @@ import android.view.MenuItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements  NavigationView.OnNavigationItemSelectedListener {
     BottomNavigationView bottomNavigation;
     NavController navController;
     DrawerLayout drawer;
@@ -28,18 +28,21 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottomNavigation);
 
         navController = Navigation.findNavController(this,R.id.main);
+        bottomNavigationView.setSelectedItemId(R.id.home);
         appBarConfiguration = new AppBarConfiguration.Builder(new int[]{R.id.home,R.id.symptoms})
                 .setDrawerLayout(drawer)
                 .build();
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        bottomNavigationView=findViewById(R.id.bottomNavigation);
+
         drawer=findViewById(R.id.drawer);
         init();
+
         NavigationUI.setupActionBarWithNavController(MainActivity.this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
@@ -47,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
     @Override
     public boolean onSupportNavigateUp() {
         return NavigationUI.navigateUp(navController,appBarConfiguration );
@@ -59,5 +63,19 @@ public class MainActivity extends AppCompatActivity {
         } else {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.shareThisApp:
+
+                break;
+
+
+
+        }
+        drawer.closeDrawers(); // close nav bar
+        return true;
     }
 }

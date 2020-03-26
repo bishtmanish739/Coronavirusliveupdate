@@ -93,7 +93,9 @@ public class HomeFragment extends Fragment {
     EditText Search;
     RecyclerView recyclerView;
     List<CoronaVirusData> dataset= new ArrayList<CoronaVirusData>();
-    CoronaVirusAdapter coronaVirusAdapter=new CoronaVirusAdapter();
+    List<CoronaVirusData> datasetdiff= new ArrayList<CoronaVirusData>();
+    List<CoronaVirusData> datasetdiff2= new ArrayList<CoronaVirusData>();
+
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -114,8 +116,16 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String s=" ";
-                s=Search.getText().toString();
-                coronaVirusAdapter.getFilter().filter("india");
+               s=Search.getText().toString();
+               datasetdiff2.addAll(datasetdiff);
+                datasetdiff.addAll(datasetdiff2);
+                CoronaVirusAdapter coronaVirusAdapter=new CoronaVirusAdapter(datasetdiff);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                recyclerView.setAdapter(coronaVirusAdapter);
+                coronaVirusAdapter.getFilter().filter(s);
+                datasetdiff.addAll(datasetdiff2);
+                //Toast.makeText(getContext(), Integer.toString(datasetdiff2.size()), Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getContext(), dataset.toString(), Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -167,7 +177,7 @@ public class HomeFragment extends Fragment {
 
                 JSONArray jsonArray=new JSONArray(response);
 
-                dataset.clear();
+                //dataset.clear();
                 for(int i=0;i<jsonArray.length();i++){
                     String flag="";
                     JSONObject jsonObject=jsonArray.getJSONObject(i);
@@ -195,16 +205,19 @@ public class HomeFragment extends Fragment {
                    coronaVirusData.setTodaycases(todayCases);
                    coronaVirusData.setTodaydeads(todaysDeaths);
                    dataset.add(coronaVirusData);
+                   datasetdiff.add(coronaVirusData);
 
 
                 }
                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                CoronaVirusAdapter coronaVirusAdapter=new CoronaVirusAdapter();
 
 
                 coronaVirusAdapter.setProduct(dataset);
                 CoronaVirusAdapter coronaVirusAdapter1=new CoronaVirusAdapter(dataset);
                 recyclerView.setAdapter(coronaVirusAdapter1);
-                //coronaVirusAdapter1.getFilter().filter("india");
+               // coronaVirusAdapter.getFilter().filter("india");
+               /// Toast.makeText(getContext(), Integer.toString(dataset.size()), Toast.LENGTH_SHORT).show();
                // coronaVirusAdapter.getFilter().filter("india");
                // JSONObject jsonObject = new JSONObject(response);
 
@@ -224,7 +237,7 @@ public class HomeFragment extends Fragment {
         @Override
         public void onError(VolleyError error) {
             error.printStackTrace();
-            // Toast.makeText(CustomerListActivity.this, "error", Toast.LENGTH_SHORT).show();
+             Toast.makeText(getContext(), "Network connection Issue Refresh Again ", Toast.LENGTH_SHORT).show();
 
         }
     };
