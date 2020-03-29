@@ -4,10 +4,19 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.support.v4.media.session.PlaybackStateCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
 
 /**
@@ -70,6 +79,19 @@ public class Symptoms extends Fragment {
         View view=inflater.inflate(R.layout.fragment_symptoms, container, false);
         textView=view.findViewById(R.id.contentSymprom);
         textView.setText(symptoms+symptoms1+symptoms2+symptoms3+symptoms4);
+        MobileAds.initialize(getContext(), new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+        MobileAds.initialize(getContext(), "ca-app-pub-3624608645361712~3686755849");//this is app id
+        AdView adView = new AdView(getContext());
+         AdView mAdView = view.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();//this is test device id
+        mAdView.loadAd(adRequest);
+        adView.setAdSize(AdSize.BANNER);
+        adView.setAdUnitId("ca-app-pub-3624608645361712/6823823562");//this is ad id
+
         // Inflate the layout for this fragment
         return view;
         // Inflate the layout for this fragment

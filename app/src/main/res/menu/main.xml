@@ -13,12 +13,7 @@
         android:icon="@drawable/coronavirus"
         android:id="@+id/symptoms"
         android:menuCategory="secondary"/>
-    <item
-        android:id="@+id/shareThisApp"
-        android:title="Share This App"
-        android:menuCategory="secondary"
-        android:icon="@drawable/share_this_app_foreground"
-        />
+
 
 
 </menu>

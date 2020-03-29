@@ -16,11 +16,6 @@
         android:name="in.technicalkeeda.coronavirusliveupdate.Symptoms"
         android:label="Symptoms"
         tools:layout="@layout/fragment_symptoms" />
-    <fragment
-        android:id="@+id/shareThisApp"
-        android:name="in.technicalkeeda.coronavirusliveupdate.ShareThisApp"
-        android:label="Share Now"
-        tools:layout="@layout/fragment_share_this_app" />
 
 
 </navigation>

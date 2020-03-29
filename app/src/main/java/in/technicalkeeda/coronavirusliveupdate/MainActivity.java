@@ -12,10 +12,13 @@ import androidx.navigation.ui.NavigationUI;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
-public class MainActivity extends AppCompatActivity implements  NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity  {
     BottomNavigationView bottomNavigation;
     NavController navController;
     DrawerLayout drawer;
@@ -39,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         drawer=findViewById(R.id.drawer);
         init();
@@ -65,17 +69,5 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         }
     }
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.shareThisApp:
 
-                break;
-
-
-
-        }
-        drawer.closeDrawers(); // close nav bar
-        return true;
-    }
 }

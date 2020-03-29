@@ -30,12 +30,21 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.Array;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -89,12 +98,27 @@ public class HomeFragment extends Fragment {
 
     }
     TextView totalcases,totalDeaths,ToatalRecoverds;
-    ImageView SearchButton;
+    ImageView SearchButton,ShareButton;
     EditText Search;
     RecyclerView recyclerView;
     List<CoronaVirusData> dataset= new ArrayList<CoronaVirusData>();
     List<CoronaVirusData> datasetdiff= new ArrayList<CoronaVirusData>();
     List<CoronaVirusData> datasetdiff2= new ArrayList<CoronaVirusData>();
+    public List<CoronaVirusData> getCoronaVisrusList(String key) {
+
+
+            Gson gson = new Gson();
+            List<CoronaVirusData> companyList;
+        SharedPreferences prefs = getContext().getSharedPreferences("MY_PREF", MODE_PRIVATE);
+
+            String string = prefs.getString(key, "");
+            Type type = new TypeToken<List<CoronaVirusData>>() {
+            }.getType();
+            companyList = gson.fromJson(string, type);
+            return companyList;
+
+
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -112,6 +136,69 @@ public class HomeFragment extends Fragment {
         ToatalRecoverds=view.findViewById(R.id.TotalRecovered);
         Search=view.findViewById(R.id.SearchCountry);
         SearchButton=view.findViewById(R.id.searchButton);
+        ShareButton=view.findViewById(R.id.shareThisApp);
+        MobileAds.initialize(getContext(), new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+        MobileAds.initialize(getContext(), "ca-app-pub-3624608645361712~3686755849");//this is app id
+        AdView adView = new AdView(getContext());
+        AdView mAdView = view.findViewById(R.id.adView2);
+       /* AdRequest adRequest = new AdRequest.Builder().addTestDevice("B159D098B8F49D4F63BD3497670CA2CA").build()*/;//this is test device id
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+        adView.setAdSize(AdSize.BANNER);
+        adView.setAdUnitId("ca-app-pub-3624608645361712/3857914720");
+        MobileAds.initialize(getContext(), new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+        MobileAds.initialize(getContext(), "ca-app-pub-3624608645361712~3686755849");//this is app id
+        AdView adView1 = new AdView(getContext());
+        AdView mAdView1 = view.findViewById(R.id.adView3);
+        /* AdRequest adRequest = new AdRequest.Builder().addTestDevice("B159D098B8F49D4F63BD3497670CA2CA").build()*/;//this is test device id
+        AdRequest adRequest1 = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+        adView.setAdSize(AdSize.BANNER);
+        adView.setAdUnitId("ca-app-pub-3624608645361712/3857914720");//this is ad id
+//this is ad id
+
+        ShareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT,
+                        "Get CoronaVirus Live Update https://play.google.com/store/apps/details?id=ca-app-pub-3624608645361712~3686755849" + BuildConfig.APPLICATION_ID);
+                sendIntent.setType("text/plain");
+                startActivity(sendIntent);
+            }
+        });
+        Search.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
+                datasetdiff2.addAll(datasetdiff);
+                datasetdiff.addAll(datasetdiff2);
+                CoronaVirusAdapter coronaVirusAdapter=new CoronaVirusAdapter(datasetdiff);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                recyclerView.setAdapter(coronaVirusAdapter);
+                coronaVirusAdapter.getFilter().filter(cs);
+                datasetdiff.addAll(datasetdiff2);;
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+                //Toast.makeText(getApplicationContext(),"before text change",Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void afterTextChanged(Editable arg0) {
+               // Toast.makeText(getApplicationContext(),"after text change",Toast.LENGTH_LONG).show();
+            }
+        });
         SearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -134,6 +221,7 @@ public class HomeFragment extends Fragment {
 
         String url = "https://corona.lmao.ninja/all";
 
+
        // UserController mUserController=new UserController(getContext());
         SharedPreferences prefs = getContext().getSharedPreferences("MY_PREF", MODE_PRIVATE);
         String totalcase = prefs.getString("totalcase", "");//"No name defined" is the default value.
@@ -143,10 +231,19 @@ public class HomeFragment extends Fragment {
         totalcases.setText(totalcase);
         totalDeaths.setText(totaldeads);
         ToatalRecoverds.setText(totalRecoverded);//0 is the default value.
+        dataset=getCoronaVisrusList("dataList");
+        datasetdiff.addAll(dataset);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        CoronaVirusAdapter coronaVirusAdapter=new CoronaVirusAdapter();
+
+
+        coronaVirusAdapter.setProduct(dataset);
+        CoronaVirusAdapter coronaVirusAdapter1=new CoronaVirusAdapter(dataset);
+        recyclerView.setAdapter(coronaVirusAdapter1);
 
 
 
-        Map<String, String> mHeader = new ArrayMap<>();
+      /*  Map<String, String> mHeader = new ArrayMap<>();
         Map<String, String> mParm = new ArrayMap<>();
       // mUserController.getRequest(mHeader,mParm,url,responslistener);
 
@@ -154,7 +251,7 @@ public class HomeFragment extends Fragment {
 
                 UserController ListUserController=new UserController(getContext());
                 ListUserController.getRequest(mHeader,mParm,Listurl,allresponslistener);
-
+*/
 
 
 
