@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="in.technicalkeeda.coronavirusliveupdate">
+    package="in.coronaupdate.coronavirusliveupdate">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"
 
@@ -18,9 +18,9 @@
         android:theme="@style/AppTheme">
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-3624608645361712~3686755849"/>
-        <activity android:name=".MainActivity"></activity>
-        <activity android:name=".SplashScreen"
+            android:value="ca-app-pub-3624608645361712~5778519950"/>
+        <activity android:name="in.coronaupdate.coronavirusliveupdate.MainActivity"></activity>
+        <activity android:name="in.coronaupdate.coronavirusliveupdate.SplashScreen"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

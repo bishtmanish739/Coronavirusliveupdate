@@ -104,8 +104,9 @@
                android:layout_centerHorizontal="true"
                android:layout_alignParentBottom="true"
                ads:adSize="BANNER"
-               ads:adUnitId="ca-app-pub-3624608645361712/2724834447">
+               ads:adUnitId="ca-app-pub-3624608645361712/3756374733">
            </com.google.android.gms.ads.AdView>
+
            <LinearLayout
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
@@ -129,12 +130,24 @@
                    android:src="@drawable/share_this_app_foreground"/>
            </LinearLayout>
 
+           <com.google.android.gms.ads.AdView
+               xmlns:ads="http://schemas.android.com/apk/res-auto"
+               android:id="@+id/coronavirus"
+               android:layout_marginTop="5dp"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_centerHorizontal="true"
+               android:layout_alignParentBottom="true"
+               ads:adSize="BANNER"
+               ads:adUnitId="ca-app-pub-3624608645361712/3756374733"/>
+
 
 
            <androidx.recyclerview.widget.RecyclerView
                android:layout_width="match_parent"
-               android:layout_height="match_parent"
-               android:id="@+id/RecyclerView"/>
+               android:layout_height="wrap_content"
+               android:id="@+id/RecyclerView"
+               android:layout_marginBottom="20dp"/>
            <com.google.android.gms.ads.AdView
                xmlns:ads="http://schemas.android.com/apk/res-auto"
                android:id="@+id/adView3"
@@ -143,7 +156,7 @@
                android:layout_centerHorizontal="true"
                android:layout_alignParentBottom="true"
                ads:adSize="BANNER"
-               ads:adUnitId="ca-app-pub-3624608645361712/2724834447">
+               ads:adUnitId="ca-app-pub-3624608645361712/3152356615">
            </com.google.android.gms.ads.AdView>
 
 
