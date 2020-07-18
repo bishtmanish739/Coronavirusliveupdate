@@ -6,6 +6,7 @@ android {
 
     defaultConfig {
         applicationId "in.coronaupdate.coronavirusliveupdate"
+        vectorDrawables.useSupportLibrary = true
         minSdkVersion 16
         targetSdkVersion 29
         versionCode 4
